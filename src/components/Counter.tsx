@@ -1,7 +1,8 @@
-export default function Counter() {
+export default function Counter({ reminders }) {
 	return (
 		<p className='text-[14px] text-gray-800'>
-			<b>0</b>: 0 completed tasks
+			<b>{reminders.filter((reminder) => reminder.completed).length}</b>:{' '}
+			{reminders.length} completed
 		</p>
 	);
 }
