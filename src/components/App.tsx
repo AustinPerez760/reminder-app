@@ -28,7 +28,7 @@ function App() {
 
 				<TodoList reminders={reminders} setReminders={setReminders} />
 
-				<Sidebar />
+				<Sidebar reminders={reminders} setReminders={setReminders} />
 			</main>
 
 			<Footer />

@@ -6,7 +6,7 @@ export default function ReminderList({ reminders, setReminders }) {
 			{reminders.map((reminder) => (
 				<li
 					key={reminder.id}
-					className='flex justify-between items-center px-8 h-[50px] text-[14px] cursor pointer border-b border-slate-500 text-gray-500 cursor-pointer'
+					className='flex justify-between items-center px-8 h-[50px] text-[14px] cursor pointer border-b border-slate-500 text-gray-300 cursor-pointer'
 					onClick={() => {
 						setReminders(
 							reminders.map((r) => {
