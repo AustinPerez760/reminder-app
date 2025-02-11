@@ -1,5 +1,5 @@
 import DeleteBtn from './DeleteBtn';
-import { Reminder } from './App';
+import { Reminder } from '../lib/types';
 
 type ReminderListProps = {
 	reminders: Reminder[];

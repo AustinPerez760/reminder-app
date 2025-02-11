@@ -4,12 +4,7 @@ import Header from './Header';
 import TodoList from './TodoList';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
-
-export type Reminder = {
-	id: number;
-	text: string;
-	completed: boolean;
-};
+import { Reminder } from '../lib/types';
 
 function App() {
 	// State to store reminders
