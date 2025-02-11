@@ -1,21 +1,30 @@
 import DeleteBtn from './DeleteBtn';
+import { Reminder } from './App';
 
-export default function ReminderList({ reminders, setReminders }) {
+type ReminderListProps = {
+	reminders: Reminder[];
+	handleToggleReminder: (reminderId: number) => void;
+	handleDeleteReminder: (reminderId: number) => void;
+};
+
+export default function ReminderList({
+	reminders,
+	handleToggleReminder,
+	handleDeleteReminder,
+}: ReminderListProps) {
 	return (
 		<ul>
+			{reminders.length === 0 ? (
+				<li className='h-full flex justify-center items center font-semibold'>
+					{' '}
+				</li>
+			) : null}
 			{reminders.map((reminder) => (
 				<li
 					key={reminder.id}
 					className='flex justify-between items-center px-8 h-[50px] text-[14px] cursor pointer border-b border-slate-500 text-gray-300 cursor-pointer'
 					onClick={() => {
-						setReminders(
-							reminders.map((r) => {
-								if (r.id === reminder.id) {
-									return { ...r, completed: !r.completed };
-								}
-								return r;
-							})
-						);
+						handleToggleReminder(reminder.id);
 					}}>
 					<span
 						className={` ${
@@ -24,7 +33,10 @@ export default function ReminderList({ reminders, setReminders }) {
 						{reminder.text}
 					</span>
 
-					<DeleteBtn id={reminder.id} setReminders={setReminders} />
+					<DeleteBtn
+						id={reminder.id}
+						handleDeleteReminder={handleDeleteReminder}
+					/>
 				</li>
 			))}
 		</ul>

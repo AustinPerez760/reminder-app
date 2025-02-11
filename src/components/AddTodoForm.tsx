@@ -1,21 +1,20 @@
 import Button from './Button';
 import { useState } from 'react';
 
-export default function AddTodoForm({ reminders, setReminders }) {
+type AddTodoFormProps = {
+	handleAddReminder: (reminderText: string) => void;
+};
+
+export default function AddTodoForm({ handleAddReminder }: AddTodoFormProps) {
 	const [reminderText, setReminderText] = useState('');
 	return (
 		<form
 			className='text-gray-300'
 			onSubmit={(event) => {
 				event.preventDefault();
-				setReminders((prev) => [
-					...prev,
-					{
-						id: prev.length + 1,
-						text: reminderText,
-						completed: false,
-					},
-				]);
+				handleAddReminder(reminderText);
+
+				setReminderText('');
 			}}>
 			<h2 className='font-medium text-gray-300'>Add reminder</h2>
 			<input
