@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { Reminder } from '../lib/types';
+import { useKindeAuth } from '@kinde-oss/kinde-auth-react';
 
 type RemindersContextProviderProps = {
 	children: React.ReactNode;
@@ -28,6 +29,8 @@ const getInitialReminders = () => {
 export default function RemindersContextProvider({
 	children,
 }: RemindersContextProviderProps) {
+	const { isAuthenticated } = useKindeAuth();
+
 	// State to store reminders
 	const [reminders, setReminders] = useState<Reminder[]>(getInitialReminders);
 
@@ -39,7 +42,7 @@ export default function RemindersContextProvider({
 
 	// Handler functions to add, toggle and delete reminders
 	const handleAddReminder = (reminderText: string) => {
-		if (reminders.length >= 5) {
+		if (reminders.length >= 5 && !isAuthenticated) {
 			alert('You can only add 5 reminders');
 			return;
 		} else {
