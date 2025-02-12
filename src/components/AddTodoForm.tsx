@@ -1,12 +1,10 @@
+import { useRemindersContext } from '../lib/hooks';
 import Button from './Button';
 import { useState } from 'react';
 
-type AddTodoFormProps = {
-	handleAddReminder: (reminderText: string) => void;
-};
-
-export default function AddTodoForm({ handleAddReminder }: AddTodoFormProps) {
+export default function AddTodoForm() {
 	const [reminderText, setReminderText] = useState('');
+	const { handleAddReminder } = useRemindersContext();
 	return (
 		<form
 			className='text-gray-300'

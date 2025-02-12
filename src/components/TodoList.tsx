@@ -1,17 +1,10 @@
 import DeleteBtn from './DeleteBtn';
-import { Reminder } from '../lib/types';
+import { useRemindersContext } from '../lib/hooks';
 
-type ReminderListProps = {
-	reminders: Reminder[];
-	handleToggleReminder: (reminderId: number) => void;
-	handleDeleteReminder: (reminderId: number) => void;
-};
+export default function ReminderList() {
+	const { reminders, handleToggleReminder, handleDeleteReminder } =
+		useRemindersContext();
 
-export default function ReminderList({
-	reminders,
-	handleToggleReminder,
-	handleDeleteReminder,
-}: ReminderListProps) {
 	return (
 		<ul>
 			{reminders.length === 0 ? (
