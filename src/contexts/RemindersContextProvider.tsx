@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Reminder } from '../lib/types';
 
 type RemindersContextProviderProps = {
@@ -16,11 +16,20 @@ type RRemindersConrtext = {
 // eslint-disable-next-line react-refresh/only-export-components
 export const RemindersContext = createContext<RRemindersConrtext | null>(null);
 
+const getInitialReminders = () => {
+	const savedReminders = localStorage.getItem('reminders');
+	if (savedReminders) {
+		return JSON.parse(savedReminders);
+	} else {
+		return [];
+	}
+};
+
 export default function RemindersContextProvider({
 	children,
 }: RemindersContextProviderProps) {
 	// State to store reminders
-	const [reminders, setReminders] = useState<Reminder[]>([]);
+	const [reminders, setReminders] = useState<Reminder[]>(getInitialReminders);
 
 	// Derived state to count completed reminders
 	const totalNumberOfReminders = reminders.length;
@@ -59,6 +68,11 @@ export default function RemindersContextProvider({
 	const handleDeleteReminder = (id: number) => {
 		setReminders(reminders.filter((reminder) => reminder.id !== id));
 	};
+
+	// Side effects to persist reminders in local storage
+	useEffect(() => {
+		localStorage.setItem('reminders', JSON.stringify(reminders));
+	}, [reminders]);
 
 	return (
 		<RemindersContext.Provider
